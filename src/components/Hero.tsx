@@ -90,7 +90,8 @@ export default function Hero() {
           >
             Stop Guessing.
             <br />
-            Start Losing.
+            Start Losing{" "}
+            <span style={{ color: "#EF4444" }}>Weight.</span>
           </h1>
 
           {/* Subheadline */}
