@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { useAuthModal } from "@/context/AuthModalContext";
 
 const cards = [
   {
@@ -117,6 +118,7 @@ function ContentCard({ card, delay }: { card: typeof cards[0]; delay: number }) 
 
 export default function WhatsInside() {
   const headerRef = useRef<HTMLDivElement | null>(null);
+  const { openModal } = useAuthModal();
 
   useEffect(() => {
     const el = headerRef.current;
@@ -128,10 +130,6 @@ export default function WhatsInside() {
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
-
-  const scrollToDownload = () => {
-    document.querySelector("#final-cta")?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <section id="whats-inside" style={{ background: "#FAFAFA", padding: "96px 0" }}>
@@ -180,10 +178,10 @@ export default function WhatsInside() {
           className="cta-banner"
         >
           <p className="font-work" style={{ fontSize: 18, color: "#FAFAFA", margin: 0, lineHeight: 1.5 }}>
-            All 21 pages are free. No email. No upsell. No supplements. Just download and use.
+            All 21 pages. No supplements. Verify via WhatsApp, pay once, get instant access.
           </p>
-          <button onClick={scrollToDownload} className="btn-primary">
-            Download Free →
+          <button onClick={openModal} className="btn-primary">
+            Get the Guide →
           </button>
         </div>
       </div>

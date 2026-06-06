@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useCounterAnimation } from "@/hooks/useScrollReveal";
+import { useAuthModal } from "@/context/AuthModalContext";
 
 function StatBlock({ number, label, borderAccent }: { number: number; label: string; borderAccent: boolean }) {
   const counterRef = useCounterAnimation(number);
@@ -25,6 +26,7 @@ function StatBlock({ number, label, borderAccent }: { number: number; label: str
 
 export default function Hero() {
   const barRef = useRef<HTMLDivElement | null>(null);
+  const { openModal } = useAuthModal();
 
   useEffect(() => {
     const bar = barRef.current;
@@ -36,10 +38,6 @@ export default function Hero() {
     observer.observe(bar);
     return () => observer.disconnect();
   }, []);
-
-  const scrollToDownload = () => {
-    document.querySelector("#final-cta")?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <section
@@ -114,8 +112,8 @@ export default function Hero() {
             style={{ display: "flex", flexWrap: "wrap", gap: 16, marginTop: 32 }}
             className="cta-row"
           >
-            <button onClick={scrollToDownload} className="btn-primary">
-              Download the Free Guide →
+            <button onClick={openModal} className="btn-primary">
+              Get the Guide →
             </button>
             <a
               href="https://wa.me/message/PLACEHOLDER"
@@ -132,7 +130,7 @@ export default function Hero() {
             className="font-work"
             style={{ fontSize: 12, color: "#525252", marginTop: 20 }}
           >
-            ✓ 21 pages &nbsp;·&nbsp; ✓ All science cited &nbsp;·&nbsp; ✓ No supplements sold &nbsp;·&nbsp; ✓ No credit card
+            ✓ 21 pages &nbsp;·&nbsp; ✓ All science cited &nbsp;·&nbsp; ✓ No supplements sold &nbsp;·&nbsp; ✓ Verify via WhatsApp
           </p>
         </div>
 

@@ -1,3 +1,5 @@
+import { AuthModalProvider } from "@/context/AuthModalContext";
+import AuthModal from "@/components/AuthModal";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import GapSection from "@/components/GapSection";
@@ -11,17 +13,20 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main style={{ margin: 0, padding: 0 }}>
-      <Navbar />
-      <Hero />
-      <GapSection />
-      <FourPillars />
-      <WhatsInside />
-      <NoSupplements />
-      <ScienceStrip />
-      <Testimonials />
-      <FinalCTA />
-      <Footer />
-    </main>
+    <AuthModalProvider>
+      <main style={{ margin: 0, padding: 0 }}>
+        <AuthModal />
+        <Navbar />
+        <Hero />
+        <GapSection />
+        <FourPillars />
+        <WhatsInside />
+        <NoSupplements />
+        <ScienceStrip />
+        <Testimonials />
+        <FinalCTA />
+        <Footer />
+      </main>
+    </AuthModalProvider>
   );
 }

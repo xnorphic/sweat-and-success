@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { useAuthModal } from "@/context/AuthModalContext";
 
 export default function FinalCTA() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const barRef = useRef<HTMLDivElement | null>(null);
+  const { openModal } = useAuthModal();
 
   useEffect(() => {
     const targets = [sectionRef.current, barRef.current];
@@ -64,24 +66,65 @@ export default function FinalCTA() {
             lineHeight: 1.65,
           }}
         >
-          Download the free Sweat &amp; Success guide and join a community of women who are doing this properly — with science, support, and zero supplements.
+          Get the Sweat &amp; Success guide and join a community of women doing this properly — science, support, and zero supplements.
         </p>
 
         {/* CTA Block */}
         <div className="reveal stagger-4" style={{ marginTop: 40 }}>
-          {/* Primary Button */}
-          <a
-            href="/guide.pdf"
-            download
+          {/* Primary Button — opens WhatsApp auth modal */}
+          <button
+            onClick={openModal}
             className="btn-primary btn-primary-lg"
             style={{ display: "inline-block" }}
           >
-            Download the Free Guide →
-          </a>
+            Get the Guide →
+          </button>
+
+          {/* How it works micro-copy */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 12,
+              marginTop: 20,
+              flexWrap: "wrap",
+            }}
+          >
+            {[
+              { n: "1", label: "Verify WhatsApp" },
+              { n: "→", label: "" },
+              { n: "2", label: "Checkout" },
+              { n: "→", label: "" },
+              { n: "3", label: "Get Guide" },
+            ].map((item, i) =>
+              item.label === "" ? (
+                <span key={i} className="font-work" style={{ color: "#2A2A2A", fontSize: 16 }}>→</span>
+              ) : (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div
+                    style={{
+                      width: 24,
+                      height: 24,
+                      border: "2px solid #2A2A2A",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <span className="font-archivo" style={{ fontSize: 11, color: "#EF4444" }}>{item.n}</span>
+                  </div>
+                  <span className="font-work" style={{ fontSize: 12, color: "#525252", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+                    {item.label}
+                  </span>
+                </div>
+              )
+            )}
+          </div>
 
           {/* Or separator */}
-          <p className="font-work" style={{ fontSize: 14, color: "#525252", margin: "20px 0" }}>
-            — or —
+          <p className="font-work" style={{ fontSize: 14, color: "#525252", margin: "32px 0 20px" }}>
+            — or join the community for free —
           </p>
 
           {/* WhatsApp Row */}
@@ -140,7 +183,7 @@ export default function FinalCTA() {
               marginTop: 40,
             }}
           >
-            {["✓ No sign-up required", "✓ No supplements sold", "✓ All science cited", "✓ Free forever"].map((item) => (
+            {["✓ WhatsApp verified", "✓ No supplements sold", "✓ All science cited", "✓ Secure checkout"].map((item) => (
               <span
                 key={item}
                 className="font-work"
